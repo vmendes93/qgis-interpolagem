@@ -29,7 +29,7 @@ Ou manualmente
 
 ```bash
 pytest tests
-``
+```
 ## Estrutura do projeto
 
 qgis_interpolador/
