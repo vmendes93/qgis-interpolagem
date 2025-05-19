@@ -1,6 +1,7 @@
 # QGIS Interpolador
 
-[![Documentação](https://img.shields.io/badge/docs-pdoc-green)](https://vmendes93.github.io/qgis-interpolagem/)
+![Documentação](https://img.shields.io/badge/docs-pdoc-green)](https://vmendes93.github.io/qgis-interpolagem/)
+![Deploy Docs](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/deploy-docs.yml)
 ![Testes Automatizados](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/tests.yml/badge.svg)
 ![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -32,16 +33,7 @@ pytest tests
 ```
 ## Estrutura do projeto
 
-qgis_interpolador/
-├── interpoladores/
-├── io/       
-├── utils/
-├── tests/
-├── main.py
-├── Makefil
-├── requirements.txt
-├── setup.py
-└── CHANGELOG.md
+<pre> qgis_interpolador/ ├── interpoladores/ ├── io/ ├── utils/ ├── tests/ ├── main.py ├── Makefile ├── requirements.txt ├── setup.py └── CHANGELOG.md </pre>
 
 ## Licença
 
