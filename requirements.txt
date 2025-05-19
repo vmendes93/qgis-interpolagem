@@ -1,0 +1,5 @@
+numpy
+matplotlib
+pykrige
+pytest
+gdal
