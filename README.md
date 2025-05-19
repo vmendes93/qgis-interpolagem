@@ -33,7 +33,18 @@ pytest tests
 ```
 ## Estrutura do projeto
 
-<pre> qgis_interpolador/ ├── interpoladores/ ├── io/ ├── utils/ ├── tests/ ├── main.py ├── Makefile ├── requirements.txt ├── setup.py └── CHANGELOG.md </pre>
+<pre> 
+qgis_interpolador/ 
+├── interpoladores/ 
+├── io/ 
+├── utils/ 
+├── tests/ 
+├── main.py 
+├── Makefile 
+├── requirements.txt 
+├── setup.py 
+└── CHANGELOG.md 
+</pre>
 
 ## Licença
 
