@@ -33,12 +33,12 @@ pytest tests
 ## Estrutura do projeto
 
 qgis_interpolador/
-├── interpoladores/        # Lógicas de interpolação (IDW, Krigagem)
-├── io/                    # Leitura/escrita de dados (futuro)
-├── utils/                 # Funções auxiliares (grade, logger, etc)
-├── tests/                 # Testes automatizados
-├── main.py                # Exemplo principal
-├── Makefile               # Tarefas comuns
+├── interpoladores/
+├── io/       
+├── utils/
+├── tests/
+├── main.py
+├── Makefil
 ├── requirements.txt
 ├── setup.py
 └── CHANGELOG.md
