@@ -1,5 +1,6 @@
 # QGIS Interpolador
 
+[![Documentação](https://img.shields.io/badge/docs-pdoc-green)](https://vmendes93.github.io/qgis-interpolagem/)
 ![Testes Automatizados](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/tests.yml/badge.svg)
 ![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -18,17 +19,17 @@ Atualmente suporta:
 git clone git@github.com:vmendes93/qgis-interpolagem.git
 cd qgis_interpolador
 pip install -e .
-
+```
 ## Testes
 
 ```bash
 make test
-
+```
 Ou manualmente
 
 ```bash
 pytest tests
-
+``
 ## Estrutura do projeto
 
 qgis_interpolador/
