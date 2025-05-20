@@ -1,12 +1,44 @@
+# Bytecode do Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+
+# Logs
 *.log
+logs/
+interpolador.log
+
+# Relatórios de cobertura
+.coverage
+htmlcov/
+coverage.log
+logs/coverage-*.log
+
+# Ambientes virtuais (caso existam)
+.venv/
+env/
+venv/
+
+# Arquivos do pytest
+.pytest_cache/
+
+# Arquivos do VSCode
 .vscode/
-.env
+
+# Arquivos de backup do Vim
+*.swp
+*.swo
+
+# Build do setuptools
 *.egg-info/
 build/
 dist/
-*.sqlite
+
+# Arquivos do sistema
 .DS_Store
-.ipynb_checkpoints/
+Thumbs.db
+
+# Outros arquivos descartáveis
+NOTAS.md
+lembrete.txt
 
