@@ -9,3 +9,7 @@ class IDWConfig:
     n_neighbors: Optional[int] = None
     max_distance: Optional[float] = None  # se quiser limitar a influência
 
+@dataclass
+class KrigagemConfig:
+    modelo_variograma: str = "spherical"
+    enable_plot: bool = False  # futuramente útil
