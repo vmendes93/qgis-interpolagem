@@ -1,73 +1,89 @@
-# QGIS Interpolador
+# Kit de Interpolação para o QGIS
 
-[![Documentação](https://img.shields.io/badge/docs-pdoc-green)](https://vmendes93.github.io/qgis-interpolagem/)
-[![Deploy Docs](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/deploy-docs.yml/badge.svg)](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/deploy-docs.yml)
-[![Testes Automatizados](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/tests.yml/badge.svg)](https://github.com/vmendes93/qgis-interpolagem/actions/workflows/tests.yml)
-![Cobertura](https://img.shields.io/badge/coverage-manual-yellow)
-![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+**Kit de ferramentas para interpolação espacial, com suporte a métodos como IDW, Krigagem e geração de modelo potenciométrico.**
 
-Ferramenta de interpolação espacial com foco em uso no QGIS ou Python puro.  
-Atualmente suporta:
-
-- IDW (Inverse Distance Weighting)
-- Krigagem (Ordinary, Universal – com `PyKrige`)
+> 🚧 **Em desenvolvimento. Ainda não integrado diretamente ao QGIS.** Este repositório fornece a base computacional para posterior criação de um plugin.
 
 ---
 
-## 🛠️ Instalação
+## ✨ Funcionalidades
+
+- 📌 Interpolação IDW com configuração ajustável
+- 📌 Krigagem com diferentes modelos de variograma
+- 📌 Geração de modelo potenciométrico e vetores de fluxo
+- 📈 Visualização vetorial de fluxos sobre o grid
+- ✅ Testes automatizados com cobertura
+- 🐍 Documentação gerada automaticamente com [pdoc](https://vmendes93.github.io/qgis-interpolagem)
+
+---
+
+## 📦 Instalação
+
+Clone o projeto:
 
 ```bash
-git clone git@github.com:vmendes93/qgis-interpolagem.git
-cd qgis_interpolador
-pip install -e .
-```
-
-## ✅ Testes
-
-```bash
-make test
-```
-
-Ou manualmente:
-
-```bash
-pytest tests
-```
-
-Para ver a cobertura de testes:
-
-```bash
-make coverage
+git clone https://github.com/vmendes93/qgis-interpolagem.git
+cd qgis-interpolagem
+pip install -r requirements.txt
 ```
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🧪 Rodando os testes
 
-<pre>
-qgis_interpolador/
-├── interpoladores/
-├── io_utils/
-├── utils/
-├── tests/
-├── main.py
-├── Makefile
-├── requirements.txt
-├── setup.py
-├── CHANGELOG.md
-└── README.md
-</pre>
+```bash
+make test         # Roda todos os testes
+make coverage     # Gera relatório de cobertura no terminal
+make coverage-log # Gera logs de cobertura com timestamp
+```
 
 ---
 
-## 📜 Licença
+## 📚 Documentação
 
-Distribuído sob os termos da licença MIT.  
-Consulte o arquivo [LICENSE](./LICENSE) para mais informações.
+A documentação está disponível em:
+
+🔗 [https://vmendes93.github.io/qgis-interpolagem](https://vmendes93.github.io/qgis-interpolagem)
+
+Gerada automaticamente com `pdoc`.
 
 ---
 
-## 🕓 Histórico de versões
+## 📂 Estrutura
 
-Veja o [CHANGELOG.md](./CHANGELOG.md) para detalhes sobre o desenvolvimento.
+```
+interpoladores/
+├── base.py
+├── idw.py
+├── krigagem.py
+├── modelo_potenciometrico.py
+io_utils/
+├── leitor.py
+├── exportador.py
+utils/
+├── grid_utils.py
+tests/
+├── test_idw.py
+├── test_krigagem.py
+├── test_modelo_potenciometrico.py
+```
+
+---
+
+## 🎯 Próximos passos
+
+- [ ] Integração com QGIS como plugin gráfico
+- [ ] Interface de parâmetros via GUI
+- [ ] Exportação direta para camadas vetoriais
+
+---
+
+## 🛠️ Contribuindo
+
+Contribuições são bem-vindas! Abra um pull request ou entre em contato para colaborar.
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
