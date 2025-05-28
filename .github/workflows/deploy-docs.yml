@@ -1,4 +1,4 @@
-name: Deploy Docs
+ame: Deploy Docs
 
 on:
   push:
@@ -25,11 +25,12 @@ jobs:
       - name: Instala dependências
         run: |
           python -m pip install --upgrade pip
-          pip install . pdoc
+          pip install pdoc
 
-      - name: Gera documentação
+      - name: Gera documentação HTML com pdoc
         run: |
-          pdoc html interpoladores utils io --output-dir docs --force
+          rm -rf docs/*
+          pdoc interpoladores io_utils utils --output-dir docs --html
 
       - name: Publica no GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -37,4 +38,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           publish_branch: gh-pages
-
