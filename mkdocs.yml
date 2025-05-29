@@ -2,6 +2,8 @@ site_name: Kit de Interpolação para o QGIS
 site_description: Biblioteca e futuro plugin para interpolação espacial com IDW, Krigagem e análise potenciométrica
 site_author: Vinicius Mendes
 repo_url: https://github.com/vmendes93/qgis-interpolagem
+site_url: https://vmendes93.github.io/qgis-interpolagem/
+use_directory_urls: true
 theme:
   name: material
   language: pt-BR
