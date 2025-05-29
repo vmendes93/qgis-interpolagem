@@ -75,13 +75,8 @@
 <p>Este módulo fornece a classe Krigagem para realizar interpolação
 geoestatística sobre uma grade regular, com diferentes modelos de variograma.</p>
 
-<h6 id="classes">Classes:</h6>
-
-<blockquote>
-  <ul>
-  <li>Krigagem: Interpolador por Krigagem Ordinária.</li>
-  </ul>
-</blockquote>
+<p>Classes:
+    - Krigagem: Interpolador por Krigagem Ordinária.</p>
 
 <p>Dependências:
     - numpy
@@ -224,25 +219,23 @@ geoestatística sobre uma grade regular, com diferentes modelos de variograma.</
 
 <p>Permite interpolação geoestatística configurando o modelo de variograma.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    x (list or np.ndarray): Coordenadas X dos pontos amostrados.
+    y (list or np.ndarray): Coordenadas Y dos pontos amostrados.
+    z (list or np.ndarray): Valores associados aos pontos.
+    modelo_variograma (str, optional): Modelo de variograma a ser usado.
+        Padrão é 'spherical'. Outros modelos suportados incluem
+        'linear', 'gaussian', 'exponential' e 'power'.</p>
 
-<ul>
-<li><strong>x (list or np.ndarray):</strong>  Coordenadas X dos pontos amostrados.</li>
-<li><strong>y (list or np.ndarray):</strong>  Coordenadas Y dos pontos amostrados.</li>
-<li><strong>z (list or np.ndarray):</strong>  Valores associados aos pontos.</li>
-<li><strong>modelo_variograma (str, optional):</strong>  Modelo de variograma a ser usado.
-Padrão é 'spherical'. Outros modelos suportados incluem
-'linear', 'gaussian', 'exponential' e 'power'.</li>
-</ul>
-
-<h6 id="example">Example:</h6>
+<p>Example:</p>
 
 <blockquote>
-  <div class="pdoc-code codehilite">
-<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">krig</span> <span class="o">=</span> <span class="n">Krigagem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">modelo_variograma</span><span class="o">=</span><span class="s1">&#39;exponential&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">z_interp</span> <span class="o">=</span> <span class="n">krig</span><span class="o">.</span><span class="n">interpolar</span><span class="p">(</span><span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">)</span>
-</code></pre>
-  </div>
+  <blockquote>
+    <blockquote>
+      <p>krig = Krigagem(x, y, z, modelo_variograma='exponential')
+      z_interp = krig.interpolar(grid_x, grid_y)</p>
+    </blockquote>
+  </blockquote>
 </blockquote>
 </div>
 
@@ -348,24 +341,15 @@ Padrão é 'spherical'. Outros modelos suportados incluem
 
             <div class="docstring"><p>Executa a Krigagem Ordinária sobre a grade fornecida.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    gridx (np.ndarray): Meshgrid das coordenadas X da grade.
+    gridy (np.ndarray): Meshgrid das coordenadas Y da grade.</p>
 
-<ul>
-<li><strong>gridx (np.ndarray):</strong>  Meshgrid das coordenadas X da grade.</li>
-<li><strong>gridy (np.ndarray):</strong>  Meshgrid das coordenadas Y da grade.</li>
-</ul>
+<p>Returns:
+    np.ndarray: Grade 2D com os valores interpolados.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: Grade 2D com os valores interpolados.</p>
-</blockquote>
-
-<h6 id="raises">Raises:</h6>
-
-<ul>
-<li><strong>ValueError:</strong>  Se houver problema na execução da Krigagem (e.g. pontos insuficientes).</li>
-</ul>
+<p>Raises:
+    ValueError: Se houver problema na execução da Krigagem (e.g. pontos insuficientes).</p>
 </div>
 
 

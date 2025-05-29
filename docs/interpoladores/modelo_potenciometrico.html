@@ -84,13 +84,8 @@ a partir de uma superfície interpolada.</p>
 <li>Plotar visualmente os vetores de fluxo.</li>
 </ul>
 
-<h6 id="classes">Classes:</h6>
-
-<blockquote>
-  <ul>
-  <li>ModeloPotenciometrico: Modelo que calcula os vetores de fluxo.</li>
-  </ul>
-</blockquote>
+<p>Classes:
+    - ModeloPotenciometrico: Modelo que calcula os vetores de fluxo.</p>
 
 <p>Funções:
     - calcular_gradiente_superficie: Calcula o gradiente da superfície.
@@ -286,19 +281,13 @@ a partir de uma superfície interpolada.</p>
 
 <p>A direção dos vetores de fluxo é baseada no gradiente da superfície.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    grid_x (np.ndarray): Grade de coordenadas X (meshgrid).
+    grid_y (np.ndarray): Grade de coordenadas Y (meshgrid).
+    z (np.ndarray): Superfície interpolada.</p>
 
-<ul>
-<li><strong>grid_x (np.ndarray):</strong>  Grade de coordenadas X (meshgrid).</li>
-<li><strong>grid_y (np.ndarray):</strong>  Grade de coordenadas Y (meshgrid).</li>
-<li><strong>z (np.ndarray):</strong>  Superfície interpolada.</li>
-</ul>
-
-<h6 id="methods">Methods:</h6>
-
-<blockquote>
-  <p>calcular_fluxo: Calcula os vetores de fluxo (gradiente negativo da superfície).</p>
-</blockquote>
+<p>Methods:
+    calcular_fluxo: Calcula os vetores de fluxo (gradiente negativo da superfície).</p>
 </div>
 
 
@@ -381,13 +370,10 @@ a partir de uma superfície interpolada.</p>
 
             <div class="docstring"><p>Calcula os vetores de fluxo (gradiente invertido) da superfície z.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>Tuple[np.ndarray, np.ndarray]:
-      - flow_x (np.ndarray): Componente X dos vetores de fluxo.
-      - flow_y (np.ndarray): Componente Y dos vetores de fluxo.</p>
-</blockquote>
+<p>Returns:
+    Tuple[np.ndarray, np.ndarray]:
+        - flow_x (np.ndarray): Componente X dos vetores de fluxo.
+        - flow_y (np.ndarray): Componente Y dos vetores de fluxo.</p>
 </div>
 
 
@@ -431,21 +417,15 @@ a partir de uma superfície interpolada.</p>
 
             <div class="docstring"><p>Calcula os gradientes da superfície z em relação aos grids dados.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    grid_x (np.ndarray): Grade de coordenadas X (meshgrid).
+    grid_y (np.ndarray): Grade de coordenadas Y (meshgrid).
+    z (np.ndarray): Superfície interpolada.</p>
 
-<ul>
-<li><strong>grid_x (np.ndarray):</strong>  Grade de coordenadas X (meshgrid).</li>
-<li><strong>grid_y (np.ndarray):</strong>  Grade de coordenadas Y (meshgrid).</li>
-<li><strong>z (np.ndarray):</strong>  Superfície interpolada.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>Tuple[np.ndarray, np.ndarray]:
-      - fx (np.ndarray): Gradiente no eixo X (invertido).
-      - fy (np.ndarray): Gradiente no eixo Y (invertido).</p>
-</blockquote>
+<p>Returns:
+    Tuple[np.ndarray, np.ndarray]:
+        - fx (np.ndarray): Gradiente no eixo X (invertido).
+        - fy (np.ndarray): Gradiente no eixo Y (invertido).</p>
 </div>
 
 
@@ -495,21 +475,15 @@ a partir de uma superfície interpolada.</p>
 
             <div class="docstring"><p>Plota os vetores de fluxo sobre a grade.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    grid_x (np.ndarray): Grade de coordenadas X (meshgrid).
+    grid_y (np.ndarray): Grade de coordenadas Y (meshgrid).
+    fx (np.ndarray): Componente X dos vetores de fluxo.
+    fy (np.ndarray): Componente Y dos vetores de fluxo.
+    title (str, optional): Título do gráfico. Default é "Vetores de Fluxo".</p>
 
-<ul>
-<li><strong>grid_x (np.ndarray):</strong>  Grade de coordenadas X (meshgrid).</li>
-<li><strong>grid_y (np.ndarray):</strong>  Grade de coordenadas Y (meshgrid).</li>
-<li><strong>fx (np.ndarray):</strong>  Componente X dos vetores de fluxo.</li>
-<li><strong>fy (np.ndarray):</strong>  Componente Y dos vetores de fluxo.</li>
-<li><strong>title (str, optional):</strong>  Título do gráfico. Default é "Vetores de Fluxo".</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>None</p>
-</blockquote>
+<p>Returns:
+    None</p>
 </div>
 
 

@@ -149,33 +149,28 @@
 
             <div class="docstring"><p>Cria uma grade regular de coordenadas a partir dos limites definidos.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    xmin (float): Valor mínimo no eixo X.
+    xmax (float): Valor máximo no eixo X.
+    ymin (float): Valor mínimo no eixo Y.
+    ymax (float): Valor máximo no eixo Y.
+    resolucao (float): Espaçamento entre os pontos da grade (resolução).</p>
 
-<ul>
-<li><strong>xmin (float):</strong>  Valor mínimo no eixo X.</li>
-<li><strong>xmax (float):</strong>  Valor máximo no eixo X.</li>
-<li><strong>ymin (float):</strong>  Valor mínimo no eixo Y.</li>
-<li><strong>ymax (float):</strong>  Valor máximo no eixo Y.</li>
-<li><strong>resolucao (float):</strong>  Espaçamento entre os pontos da grade (resolução).</li>
-</ul>
+<p>Returns:
+    Tuple[np.ndarray, np.ndarray]:
+        - gridx (np.ndarray): Vetor de coordenadas X.
+        - gridy (np.ndarray): Vetor de coordenadas Y.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>Tuple[np.ndarray, np.ndarray]:
-      - gridx (np.ndarray): Vetor de coordenadas X.
-      - gridy (np.ndarray): Vetor de coordenadas Y.</p>
-</blockquote>
-
-<h6 id="example">Example:</h6>
+<p>Example:</p>
 
 <blockquote>
-  <div class="pdoc-code codehilite">
-<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">gridx</span><span class="p">,</span> <span class="n">gridy</span> <span class="o">=</span> <span class="n">criar_grade</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">gridx</span><span class="p">)</span>
-<span class="go">[ 0 10 20 30 40 50 60 70 80 90]</span>
-</code></pre>
-  </div>
+  <blockquote>
+    <blockquote>
+      <p>gridx, gridy = criar_grade(0, 100, 0, 100, 10)
+      print(gridx)
+          [ 0 10 20 30 40 50 60 70 80 90]</p>
+    </blockquote>
+  </blockquote>
 </blockquote>
 </div>
 

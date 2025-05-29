@@ -67,13 +67,8 @@
 permitindo ajustes no expoente da distância, número de vizinhos e 
 distância máxima de influência.</p>
 
-<h6 id="classes">Classes:</h6>
-
-<blockquote>
-  <ul>
-  <li>IDW: Classe responsável pela interpolação IDW.</li>
-  </ul>
-</blockquote>
+<p>Classes:
+    - IDW: Classe responsável pela interpolação IDW.</p>
 
 <p>Dependências:
     - numpy
@@ -254,20 +249,18 @@ distância máxima de influência.</p>
 <li>Distância máxima de influência (<code>max_distance</code>)</li>
 </ul>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    config (IDWConfig): Configuração do IDW. Default usa parâmetros padrões.</p>
 
-<ul>
-<li><strong>config (IDWConfig):</strong>  Configuração do IDW. Default usa parâmetros padrões.</li>
-</ul>
-
-<h6 id="example">Example:</h6>
+<p>Example:</p>
 
 <blockquote>
-  <div class="pdoc-code codehilite">
-<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">idw</span> <span class="o">=</span> <span class="n">IDW</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">idw</span><span class="o">.</span><span class="n">interpolar</span><span class="p">(</span><span class="n">pontos</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">)</span>
-</code></pre>
-  </div>
+  <blockquote>
+    <blockquote>
+      <p>idw = IDW()
+      z = idw.interpolar(pontos, valores, grid_x, grid_y)</p>
+    </blockquote>
+  </blockquote>
 </blockquote>
 </div>
 
@@ -296,12 +289,9 @@ distância máxima de influência.</p>
 
             <div class="docstring"><p>Inicializa o interpolador IDW.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>config (IDWConfig):</strong>  Objeto de configuração contendo os parâmetros
-do interpolador (expoente, vizinhos, distância máxima).</li>
-</ul>
+<p>Args:
+    config (IDWConfig): Objeto de configuração contendo os parâmetros
+                        do interpolador (expoente, vizinhos, distância máxima).</p>
 </div>
 
 
@@ -367,26 +357,17 @@ do interpolador (expoente, vizinhos, distância máxima).</li>
 
             <div class="docstring"><p>Realiza interpolação IDW sobre uma grade regular.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    pontos (np.ndarray): Array de shape (N, 2) com coordenadas XY dos pontos amostrados.
+    valores (np.ndarray): Array de shape (N,) com os valores correspondentes aos pontos.
+    grid_x (np.ndarray): Meshgrid com coordenadas X da grade.
+    grid_y (np.ndarray): Meshgrid com coordenadas Y da grade.</p>
 
-<ul>
-<li><strong>pontos (np.ndarray):</strong>  Array de shape (N, 2) com coordenadas XY dos pontos amostrados.</li>
-<li><strong>valores (np.ndarray):</strong>  Array de shape (N,) com os valores correspondentes aos pontos.</li>
-<li><strong>grid_x (np.ndarray):</strong>  Meshgrid com coordenadas X da grade.</li>
-<li><strong>grid_y (np.ndarray):</strong>  Meshgrid com coordenadas Y da grade.</li>
-</ul>
+<p>Returns:
+    np.ndarray: Array 2D (mesmo shape de grid_x) com os valores interpolados.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: Array 2D (mesmo shape de grid_x) com os valores interpolados.</p>
-</blockquote>
-
-<h6 id="raises">Raises:</h6>
-
-<ul>
-<li><strong>ValueError:</strong>  Se o número de pontos não for compatível com os valores.</li>
-</ul>
+<p>Raises:
+    ValueError: Se o número de pontos não for compatível com os valores.</p>
 </div>
 
 

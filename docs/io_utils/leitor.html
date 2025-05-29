@@ -57,13 +57,8 @@ GeoJSON, ou camadas diretamente do QGIS.</p>
 <p>Funções:
     - ler_pontos: Lê pontos de um arquivo ou camada vetorial e retorna coordenadas e valores.</p>
 
-<h6 id="status">Status:</h6>
-
-<blockquote>
-  <ul>
-  <li>Ainda não implementado.</li>
-  </ul>
-</blockquote>
+<p>Status:
+    - Ainda não implementado.</p>
 
 <p>Dependências esperadas:
     - geopandas
@@ -150,27 +145,18 @@ GeoJSON, ou camadas diretamente do QGIS.</p>
 
             <div class="docstring"><p>Lê pontos de um arquivo vetorial (ex.: shapefile, GeoJSON) ou camada QGIS.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    path (str): Caminho do arquivo vetorial ou referência da camada no QGIS.</p>
 
-<ul>
-<li><strong>path (str):</strong>  Caminho do arquivo vetorial ou referência da camada no QGIS.</li>
-</ul>
+<p>Returns:
+    Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        - x (np.ndarray): Coordenadas X dos pontos.
+        - y (np.ndarray): Coordenadas Y dos pontos.
+        - valores (np.ndarray): Valores associados aos pontos.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>Tuple[np.ndarray, np.ndarray, np.ndarray]:
-      - x (np.ndarray): Coordenadas X dos pontos.
-      - y (np.ndarray): Coordenadas Y dos pontos.
-      - valores (np.ndarray): Valores associados aos pontos.</p>
-</blockquote>
-
-<h6 id="raises">Raises:</h6>
-
-<ul>
-<li><strong>NotImplementedError:</strong>  Função ainda não implementada.</li>
-<li>A implementação futura deve utilizar geopandas, fiona ou APIs do QGIS.</li>
-</ul>
+<p>Raises:
+    NotImplementedError: Função ainda não implementada.
+    A implementação futura deve utilizar geopandas, fiona ou APIs do QGIS.</p>
 </div>
 
 
