@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Conceitos de Interpolação Espacial - Kit de Interpolação para QGIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .nav a { margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Início</a>
+        <a href="quickstart.html">Guia de Início Rápido</a>
+        <a href="conceitos.html">Conceitos</a>
+        <a href="pacote.html">Referência do Pacote</a>
+        <a href="exemplos.html">Exemplos</a>
+    </div>
+
+    <h1>Conceitos de Interpolação Espacial</h1>
+
+    <p>Este documento explica os conceitos fundamentais por trás dos métodos de interpolação implementados neste projeto.</p>
+
+    <h2>Interpolação Espacial</h2>
+
+    <p>A interpolação espacial é o processo de estimar valores desconhecidos em locais não amostrados com base em valores conhecidos em locais amostrados. É amplamente utilizada em geociências, hidrologia, meteorologia e outras áreas que lidam com dados espaciais.</p>
+
+    <h2>IDW (Inverse Distance Weighting)</h2>
+
+    <p>O método IDW baseia-se no princípio de que pontos mais próximos têm maior influência no valor estimado do que pontos mais distantes.</p>
+
+    <h3>Fórmula</h3>
+
+    <p>O valor interpolado em um ponto desconhecido é calculado como:</p>
+
+    <pre><code>Z(s₀) = Σ[wᵢ × Z(sᵢ)] / Σwᵢ
+
+onde:
+wᵢ = 1 / d(s₀, sᵢ)ᵖ</code></pre>
+
+    <ul>
+        <li>Z(s₀) é o valor estimado no ponto s₀</li>
+        <li>Z(sᵢ) é o valor conhecido no ponto sᵢ</li>
+        <li>wᵢ é o peso do ponto sᵢ</li>
+        <li>d(s₀, sᵢ) é a distância entre s₀ e sᵢ</li>
+        <li>p é o expoente de potência (geralmente 2)</li>
+    </ul>
+
+    <h3>Características</h3>
+
+    <ul>
+        <li><strong>Vantagens</strong>: Simples, intuitivo, eficiente computacionalmente</li>
+        <li><strong>Desvantagens</strong>: Não estima incertezas, tende a criar "olhos de boi" ao redor dos pontos amostrais</li>
+        <li><strong>Parâmetros importantes</strong>: Expoente de potência, número de vizinhos, distância máxima</li>
+    </ul>
+
+    <h2>Krigagem</h2>
+
+    <p>A Krigagem é um método geoestatístico que utiliza a correlação espacial entre pontos para estimar valores desconhecidos, considerando não apenas a distância, mas também a configuração espacial dos pontos.</p>
+
+    <h3>Conceitos-chave</h3>
+
+    <ul>
+        <li><strong>Variograma</strong>: Descreve a correlação espacial entre pontos em função da distância</li>
+        <li><strong>Modelos de variograma</strong>: Esférico, exponencial, gaussiano, etc.</li>
+        <li><strong>Anisotropia</strong>: Variação da correlação espacial com a direção</li>
+    </ul>
+
+    <h3>Características</h3>
+
+    <ul>
+        <li><strong>Vantagens</strong>: Fornece estimativa de erro, considera a estrutura espacial dos dados</li>
+        <li><strong>Desvantagens</strong>: Mais complexo, computacionalmente mais intensivo</li>
+        <li><strong>Parâmetros importantes</strong>: Modelo de variograma, parâmetros do variograma, anisotropia</li>
+    </ul>
+
+    <h2>Modelo Potenciométrico</h2>
+
+    <p>O modelo potenciométrico é utilizado para calcular gradientes e vetores de fluxo a partir de uma superfície interpolada, como níveis de água subterrânea.</p>
+
+    <h3>Conceitos-chave</h3>
+
+    <ul>
+        <li><strong>Gradiente</strong>: Taxa de variação da superfície em cada direção</li>
+        <li><strong>Vetores de fluxo</strong>: Direção e magnitude do fluxo, perpendicular às linhas equipotenciais</li>
+        <li><strong>Lei de Darcy</strong>: O fluxo ocorre do potencial maior para o menor</li>
+    </ul>
+
+    <h3>Características</h3>
+
+    <ul>
+        <li><strong>Aplicações</strong>: Hidrogeologia, análise de fluxo de águas subterrâneas</li>
+        <li><strong>Visualização</strong>: Vetores de fluxo sobrepostos à superfície potenciométrica</li>
+    </ul>
+</body>
+</html>

@@ -1,13 +1,38 @@
-# Exemplos
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplos - Kit de Interpolação para QGIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .nav a { margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Início</a>
+        <a href="quickstart.html">Guia de Início Rápido</a>
+        <a href="conceitos.html">Conceitos</a>
+        <a href="pacote.html">Referência do Pacote</a>
+        <a href="exemplos.html">Exemplos</a>
+    </div>
 
-Esta página contém exemplos práticos de uso do Kit de Interpolação para diferentes cenários.
+    <h1>Exemplos</h1>
 
-## Exemplo 1: Interpolação IDW com Visualização
+    <p>Esta página contém exemplos práticos de uso do Kit de Interpolação para diferentes cenários.</p>
 
-Este exemplo demonstra como realizar uma interpolação IDW e visualizar os resultados.
+    <h2>Exemplo 1: Interpolação IDW com Visualização</h2>
 
-```python
-import numpy as np
+    <p>Este exemplo demonstra como realizar uma interpolação IDW e visualizar os resultados.</p>
+
+    <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 from interpoladores.idw import IDW
 from interpoladores.config import IDWConfig
@@ -54,15 +79,13 @@ plt.tight_layout()
 
 # Salvar figura
 plt.savefig('idw_interpolacao.png', dpi=300)
-plt.show()
-```
+plt.show()</code></pre>
 
-## Exemplo 2: Comparação entre Métodos de Interpolação
+    <h2>Exemplo 2: Comparação entre Métodos de Interpolação</h2>
 
-Este exemplo compara os resultados de IDW e Krigagem para o mesmo conjunto de dados.
+    <p>Este exemplo compara os resultados de IDW e Krigagem para o mesmo conjunto de dados.</p>
 
-```python
-import numpy as np
+    <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 from interpoladores.idw import IDW
 from interpoladores.config import IDWConfig
@@ -115,15 +138,13 @@ plt.colorbar(im2, ax=axes[1], label='Valor')
 
 plt.tight_layout()
 plt.savefig('comparacao_metodos.png', dpi=300)
-plt.show()
-```
+plt.show()</code></pre>
 
-## Exemplo 3: Modelo Potenciométrico com Vetores de Fluxo
+    <h2>Exemplo 3: Modelo Potenciométrico com Vetores de Fluxo</h2>
 
-Este exemplo demonstra como calcular e visualizar vetores de fluxo a partir de uma superfície potenciométrica.
+    <p>Este exemplo demonstra como calcular e visualizar vetores de fluxo a partir de uma superfície potenciométrica.</p>
 
-```python
-import numpy as np
+    <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 from interpoladores.idw import IDW
 from interpoladores.config import IDWConfig
@@ -178,15 +199,13 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 
 plt.savefig('modelo_potenciometrico.png', dpi=300)
-plt.show()
-```
+plt.show()</code></pre>
 
-## Exemplo 4: Leitura e Exportação de Dados
+    <h2>Exemplo 4: Leitura e Exportação de Dados</h2>
 
-Este exemplo demonstra como ler dados de um arquivo CSV e exportar os resultados como raster.
+    <p>Este exemplo demonstra como ler dados de um arquivo CSV e exportar os resultados como raster.</p>
 
-```python
-import numpy as np
+    <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 from interpoladores.idw import IDW
 from interpoladores.config import IDWConfig
@@ -222,5 +241,6 @@ plt.savefig('interpolacao_csv.png', dpi=300)
 
 # Exportar resultado como raster
 exportar_raster(grid_x, grid_y, z_interp, 'resultado.tif', sistema_coord='EPSG:4326')
-print("Raster exportado com sucesso para 'resultado.tif'")
-```
+print("Raster exportado com sucesso para 'resultado.tif'")</code></pre>
+</body>
+</html>

@@ -1,33 +1,58 @@
-# Guia de Início Rápido
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Guia de Início Rápido - Kit de Interpolação para QGIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .nav a { margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Início</a>
+        <a href="quickstart.html">Guia de Início Rápido</a>
+        <a href="conceitos.html">Conceitos</a>
+        <a href="pacote.html">Referência do Pacote</a>
+        <a href="exemplos.html">Exemplos</a>
+    </div>
 
-Este guia fornece instruções básicas para começar a usar o Kit de Interpolação.
+    <h1>Guia de Início Rápido</h1>
 
-## Pré-requisitos
+    <p>Este guia fornece instruções básicas para começar a usar o Kit de Interpolação.</p>
 
-- Python 3.8 ou superior
-- NumPy
-- SciPy
-- Matplotlib
-- PyKrige (para Krigagem)
+    <h2>Pré-requisitos</h2>
 
-## Instalação
+    <ul>
+        <li>Python 3.8 ou superior</li>
+        <li>NumPy</li>
+        <li>SciPy</li>
+        <li>Matplotlib</li>
+        <li>PyKrige (para Krigagem)</li>
+    </ul>
 
-```bash
-# Instale via pip (quando disponível)
+    <h2>Instalação</h2>
+
+    <pre><code># Instale via pip (quando disponível)
 pip install qgis-interpolagem
 
 # Ou instale a partir do código fonte
 git clone https://github.com/vmendes93/qgis-interpolagem.git
 cd qgis-interpolagem
-pip install -e .
-```
+pip install -e .</code></pre>
 
-## Uso Básico
+    <h2>Uso Básico</h2>
 
-### Interpolação IDW
+    <h3>Interpolação IDW</h3>
 
-```python
-from interpoladores.idw import IDW
+    <pre><code>from interpoladores.idw import IDW
 from interpoladores.config import IDWConfig
 import numpy as np
 import matplotlib.pyplot as plt
@@ -56,13 +81,11 @@ plt.xlabel('X')
 plt.ylabel('Y')
 plt.legend()
 plt.grid(True)
-plt.show()
-```
+plt.show()</code></pre>
 
-### Krigagem
+    <h3>Krigagem</h3>
 
-```python
-from interpoladores.krigagem import Krigagem
+    <pre><code>from interpoladores.krigagem import Krigagem
 from interpoladores.config import KrigagemConfig
 import numpy as np
 import matplotlib.pyplot as plt
@@ -90,13 +113,11 @@ plt.xlabel('X')
 plt.ylabel('Y')
 plt.legend()
 plt.grid(True)
-plt.show()
-```
+plt.show()</code></pre>
 
-### Modelo Potenciométrico
+    <h3>Modelo Potenciométrico</h3>
 
-```python
-from interpoladores.modelo_potenciometrico import ModeloPotenciometrico, plotar_vetores_fluxo
+    <pre><code>from interpoladores.modelo_potenciometrico import ModeloPotenciometrico, plotar_vetores_fluxo
 from interpoladores.idw import IDW
 from interpoladores.config import IDWConfig
 import numpy as np
@@ -123,11 +144,14 @@ fig = plotar_vetores_fluxo(grid_x, grid_y, fx, fy,
                           title="Vetores de Fluxo", 
                           densidade=2, 
                           escala=20.0)
-plt.show()
-```
+plt.show()</code></pre>
 
-## Próximos Passos
+    <h2>Próximos Passos</h2>
 
-- Explore a [documentação de conceitos](conceitos.md) para entender melhor os métodos de interpolação
-- Veja a [referência da API](api.md) para detalhes completos sobre as classes e métodos
-- Confira os [exemplos](exemplos.md) para casos de uso mais avançados
+    <ul>
+        <li>Explore a <a href="conceitos.html">documentação de conceitos</a> para entender melhor os métodos de interpolação</li>
+        <li>Veja a <a href="pacote.html">referência do pacote</a> para detalhes completos sobre as classes e métodos</li>
+        <li>Confira os <a href="exemplos.html">exemplos</a> para casos de uso mais avançados</li>
+    </ul>
+</body>
+</html>

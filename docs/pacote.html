@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Referência do Pacote - Kit de Interpolação para QGIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        a { color: #0366d6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .nav a { margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Início</a>
+        <a href="quickstart.html">Guia de Início Rápido</a>
+        <a href="conceitos.html">Conceitos</a>
+        <a href="pacote.html">Referência do Pacote</a>
+        <a href="exemplos.html">Exemplos</a>
+    </div>
+
+    <h1>Referência do Pacote</h1>
+
+    <p>Esta página documenta as principais classes e métodos disponíveis no Kit de Interpolação.</p>
+
+    <h2>Módulo <code>interpoladores</code></h2>
+
+    <h3>Classe <code>IDW</code></h3>
+
+    <pre><code>from interpoladores.idw import IDW
+from interpoladores.config import IDWConfig</code></pre>
+
+    <p><strong>Descrição</strong>: Implementa o método de interpolação Inverse Distance Weighting.</p>
+
+    <p><strong>Construtor</strong>:</p>
+    <ul>
+        <li><code>IDW(config: IDWConfig = IDWConfig())</code>: Inicializa o interpolador IDW com a configuração especificada.</li>
+    </ul>
+
+    <p><strong>Métodos</strong>:</p>
+    <ul>
+        <li><code>interpolar(pontos, valores, grid_x, grid_y)</code>: Realiza a interpolação IDW sobre uma grade regular.
+            <ul>
+                <li><code>pontos</code>: Array de shape (N, 2) com coordenadas XY dos pontos amostrados.</li>
+                <li><code>valores</code>: Array de shape (N,) com os valores correspondentes aos pontos.</li>
+                <li><code>grid_x</code>: Meshgrid com coordenadas X da grade.</li>
+                <li><code>grid_y</code>: Meshgrid com coordenadas Y da grade.</li>
+                <li><strong>Retorno</strong>: Array 2D (mesmo shape de grid_x) com os valores interpolados.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Classe <code>IDWConfig</code></h3>
+
+    <pre><code>from interpoladores.config import IDWConfig</code></pre>
+
+    <p><strong>Descrição</strong>: Configuração para o algoritmo IDW.</p>
+
+    <p><strong>Atributos</strong>:</p>
+    <ul>
+        <li><code>power</code>: Expoente da distância. Valores maiores aumentam a influência de pontos próximos. Default é 2.0.</li>
+        <li><code>n_neighbors</code>: Número de vizinhos a considerar. Se None, usa todos os pontos. Default é None.</li>
+        <li><code>max_distance</code>: Distância máxima para considerar pontos. Se None, não há limite. Default é None.</li>
+        <li><code>default_value</code>: Valor padrão para células sem vizinhos válidos. Se None, usa NaN. Default é None.</li>
+    </ul>
+
+    <h3>Classe <code>Krigagem</code></h3>
+
+    <pre><code>from interpoladores.krigagem import Krigagem
+from interpoladores.config import KrigagemConfig</code></pre>
+
+    <p><strong>Descrição</strong>: Implementa o método de interpolação por Krigagem Ordinária.</p>
+
+    <p><strong>Construtor</strong>:</p>
+    <ul>
+        <li><code>Krigagem(x, y, z, *, config=None)</code>: Inicializa o interpolador de Krigagem.
+            <ul>
+                <li><code>x</code>: Coordenadas X dos pontos amostrados.</li>
+                <li><code>y</code>: Coordenadas Y dos pontos amostrados.</li>
+                <li><code>z</code>: Valores associados aos pontos.</li>
+                <li><code>config</code>: Configuração da Krigagem. Se None, usa configuração padrão.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Métodos</strong>:</p>
+    <ul>
+        <li><code>interpolar(gridx, gridy)</code>: Executa a Krigagem Ordinária sobre a grade fornecida.
+            <ul>
+                <li><code>gridx</code>: Meshgrid das coordenadas X da grade.</li>
+                <li><code>gridy</code>: Meshgrid das coordenadas Y da grade.</li>
+                <li><strong>Retorno</strong>: Se enable_statistics=False (padrão): Grade 2D com os valores interpolados.
+                    Se enable_statistics=True: Tupla com (grade interpolada, variância de estimativa).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Classe <code>KrigagemConfig</code></h3>
+
+    <pre><code>from interpoladores.config import KrigagemConfig</code></pre>
+
+    <p><strong>Descrição</strong>: Configuração para o algoritmo de Krigagem Ordinária.</p>
+
+    <p><strong>Atributos</strong>:</p>
+    <ul>
+        <li><code>modelo_variograma</code>: Modelo de variograma a ser usado. Opções: 'linear', 'power', 'gaussian', 'spherical', 'exponential'. Default é 'spherical'.</li>
+        <li><code>nlags</code>: Número de lags para cálculo do variograma experimental. Se None, usa o valor padrão do PyKrige. Default é None.</li>
+        <li><code>variogram_model_parameters</code>: Parâmetros específicos do modelo de variograma. Se None, PyKrige estima automaticamente. Default é None.</li>
+        <li><code>anisotropy_angle</code>: Ângulo de anisotropia em graus (0-180). Se 0, assume isotropia. Default é 0.</li>
+        <li><code>anisotropy_ratio</code>: Razão de anisotropia. Deve ser >= 1.0. Default é 1.0 (isotropia).</li>
+        <li><code>verbose</code>: Se True, exibe informações durante o processamento. Default é False.</li>
+        <li><code>enable_statistics</code>: Se True, calcula e retorna estatísticas de erro. Default é False.</li>
+    </ul>
+
+    <h3>Classe <code>ModeloPotenciometrico</code></h3>
+
+    <pre><code>from interpoladores.modelo_potenciometrico import ModeloPotenciometrico</code></pre>
+
+    <p><strong>Descrição</strong>: Classe para cálculo de vetores de fluxo (modelo potenciométrico) a partir de uma superfície interpolada.</p>
+
+    <p><strong>Construtor</strong>:</p>
+    <ul>
+        <li><code>ModeloPotenciometrico(grid_x, grid_y, z)</code>: Inicializa o modelo potenciométrico.
+            <ul>
+                <li><code>grid_x</code>: Grade de coordenadas X (meshgrid).</li>
+                <li><code>grid_y</code>: Grade de coordenadas Y (meshgrid).</li>
+                <li><code>z</code>: Superfície interpolada.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Métodos</strong>:</p>
+    <ul>
+        <li><code>calcular_gradiente()</code>: Calcula o gradiente da superfície z.
+            <ul>
+                <li><strong>Retorno</strong>: Tupla com (grad_x, grad_y) - componentes X e Y do gradiente.</li>
+            </ul>
+        </li>
+        <li><code>calcular_fluxo()</code>: Calcula os vetores de fluxo (gradiente invertido) da superfície z.
+            <ul>
+                <li><strong>Retorno</strong>: Tupla com (flow_x, flow_y) - componentes X e Y dos vetores de fluxo.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Função <code>plotar_vetores_fluxo</code></h3>
+
+    <pre><code>from interpoladores.modelo_potenciometrico import plotar_vetores_fluxo</code></pre>
+
+    <p><strong>Descrição</strong>: Plota os vetores de fluxo sobre a grade.</p>
+
+    <p><strong>Parâmetros</strong>:</p>
+    <ul>
+        <li><code>grid_x</code>: Grade de coordenadas X (meshgrid).</li>
+        <li><code>grid_y</code>: Grade de coordenadas Y (meshgrid).</li>
+        <li><code>fx</code>: Componente X dos vetores de fluxo.</li>
+        <li><code>fy</code>: Componente Y dos vetores de fluxo.</li>
+        <li><code>title</code>: Título do gráfico. Default é "Vetores de Fluxo".</li>
+        <li><code>densidade</code>: Densidade de vetores a mostrar (1 = todos). Default é 1.</li>
+        <li><code>escala</code>: Fator de escala para os vetores. Default é 1.0.</li>
+        <li><code>cor</code>: Cor dos vetores. Default é 'blue'.</li>
+        <li><code>salvar_como</code>: Caminho para salvar a figura. Se None, não salva. Default é None.</li>
+    </ul>
+
+    <p><strong>Retorno</strong>: Objeto Figure do matplotlib com o gráfico gerado.</p>
+
+    <h2>Módulo <code>utils</code></h2>
+
+    <h3>Módulo <code>grid_utils</code></h3>
+
+    <pre><code>from utils.grid_utils import criar_grade_regular</code></pre>
+
+    <p><strong>Descrição</strong>: Utilitários para criação e manipulação de grades.</p>
+
+    <p><strong>Funções</strong>:</p>
+    <ul>
+        <li><code>criar_grade_regular(x_min, x_max, y_min, y_max, nx, ny)</code>: Cria uma grade regular para interpolação.
+            <ul>
+                <li><code>x_min</code>, <code>x_max</code>: Limites horizontais da grade.</li>
+                <li><code>y_min</code>, <code>y_max</code>: Limites verticais da grade.</li>
+                <li><code>nx</code>, <code>ny</code>: Número de pontos nas direções X e Y.</li>
+                <li><strong>Retorno</strong>: Tupla com (grid_x, grid_y) - meshgrids das coordenadas X e Y.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Módulo <code>logging_utils</code></h3>
+
+    <pre><code>from utils.logging_utils import configurar_logger, InterpoladorLogger</code></pre>
+
+    <p><strong>Descrição</strong>: Utilitários de logging para monitoramento de progresso dos algoritmos.</p>
+
+    <p><strong>Funções</strong>:</p>
+    <ul>
+        <li><code>configurar_logger(nome, nivel, formato, arquivo_log, console)</code>: Configura um logger com handlers para console e/ou arquivo.</li>
+    </ul>
+
+    <p><strong>Classes</strong>:</p>
+    <ul>
+        <li><code>InterpoladorLogger</code>: Classe para logging de operações de interpolação.</li>
+    </ul>
+
+    <h2>Módulo <code>io_utils</code></h2>
+
+    <h3>Módulo <code>leitor</code></h3>
+
+    <pre><code>from io_utils.leitor import ler_pontos_csv, ler_pontos_shapefile</code></pre>
+
+    <p><strong>Descrição</strong>: Funções para leitura de dados de diferentes formatos.</p>
+
+    <p><strong>Funções</strong>:</p>
+    <ul>
+        <li><code>ler_pontos_csv(arquivo, delimitador, colunas)</code>: Lê pontos e valores de um arquivo CSV.</li>
+        <li><code>ler_pontos_shapefile(arquivo, campo_valor)</code>: Lê pontos e valores de um arquivo Shapefile.</li>
+    </ul>
+
+    <h3>Módulo <code>exportador</code></h3>
+
+    <pre><code>from io_utils.exportador import exportar_raster, exportar_vetores</code></pre>
+
+    <p><strong>Descrição</strong>: Funções para exportação de resultados em diferentes formatos.</p>
+
+    <p><strong>Funções</strong>:</p>
+    <ul>
+        <li><code>exportar_raster(grid_x, grid_y, z, arquivo_saida, sistema_coord)</code>: Exporta uma grade interpolada como arquivo raster.</li>
+        <li><code>exportar_vetores(grid_x, grid_y, fx, fy, arquivo_saida, sistema_coord)</code>: Exporta vetores de fluxo como arquivo shapefile.</li>
+    </ul>
+</body>
+</html>
