@@ -3,7 +3,7 @@ site_description: Biblioteca e futuro plugin para interpolação espacial com ID
 site_author: Vinicius Mendes
 repo_url: https://github.com/vmendes93/qgis-interpolagem
 site_url: https://vmendes93.github.io/qgis-interpolagem/
-use_directory_urls: true
+use_directory_urls: false
 theme:
   name: material
   language: pt-BR
