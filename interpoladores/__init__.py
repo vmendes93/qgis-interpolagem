@@ -1,12 +1,15 @@
 """
-Módulo `interpoladores`
+Kit de Interpolação para o QGIS
+-------------------------------
 
-Este pacote contém os algoritmos principais de interpolação espacial utilizados
-no projeto, incluindo:
+Este pacote implementa interpoladores espaciais (IDW, Krigagem) e ferramentas
+relacionadas a modelagem potenciométrica e análise de superfícies,
+voltadas para aplicações em geotecnologia com integração futura ao QGIS.
 
-- IDW (Inverse Distance Weighting)
-- Krigagem (Ordinary Kriging)
-- Modelagem de superfície potenciométrica
-
-Cada algoritmo está estruturado como uma classe com métodos próprios de interpolação.
+Recursos:
+- Interpoladores com parâmetros personalizáveis
+- Geração de vetores de fluxo
+- Estrutura modular e testável
+- Compatível com Python 3.10+
 """
+

@@ -45,7 +45,7 @@ A documentação está disponível em:
 
 🔗 [https://vmendes93.github.io/qgis-interpolagem](https://vmendes93.github.io/qgis-interpolagem)
 
-Gerada automaticamente com `pdoc`.
+Gerada com mkdocs.
 
 ---
 

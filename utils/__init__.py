@@ -1,6 +1,3 @@
 """
-Módulo `utils`
-
-Funções utilitárias de apoio geral, como manipulação de grades (grid)
-e estruturas auxiliares.
+Utilitários diversos usados em todo o projeto, como funções de manipulação de grade espacial.
 """
