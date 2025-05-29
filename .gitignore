@@ -1,7 +1,7 @@
 # Bytecode do Python
 __pycache__/
 *.py[cod]
-*.pyo
+*$py.class
 
 # Logs
 *.log
@@ -41,4 +41,19 @@ Thumbs.db
 # Outros arquivos descartáveis
 NOTAS.md
 lembrete.txt
+update_docstrings.py
 
+# Testes e cobertura
+.coverage
+.pytest_cache/
+logs/
+htmlcov/
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentação gerada
+site/

@@ -1,50 +1,111 @@
+# Variáveis de configuração
+PYTHON = python3
+PYTEST = pytest
+PYTEST_ARGS = -v
+COVERAGE = coverage
+MKDOCS = mkdocs
+PIP = pip
+
+# Diretórios do projeto
+SRC_DIR = .
 TEST_DIR = tests
+DOC_DIR = docs
+SITE_DIR = site
 
-# Busca automaticamente os módulos e gera os arquivos de teste correspondentes
-TEST_FILES := $(wildcard $(TEST_DIR)/test_*.py)
+# Alvos principais
+.PHONY: all test coverage clean docs lint install help
 
-.PHONY: test coverage run install clean log coverage-log
+# Alvo padrão
+all: test coverage docs
 
-# Roda os testes e salva log
-log:
-	@echo "🧪 Rodando testes e salvando em interpolador.log..."
-	pytest $(TEST_FILES) | tee interpolador.log
-
-# Roda os testes
-test:
-	@echo "🧪 Rodando testes para: $(PYTHON_MODULES)"
-	pytest $(TEST_FILES)
-
-# Gera cobertura de testes
-coverage:
-	coverage run -m pytest $(TEST_FILES)
-	coverage report -m | tee coverage.log
-	coverage html
-	@echo "📄 HTML gerado em htmlcov/index.html"
-	@echo "📈 Gerando relatório de cobertura com coverage..."
-
-# Executa o script principal
-run:
-	@echo "🚀 Rodando main.py..."
-	python3 main.py
-
-# Instala dependências
+# Instalação de dependências
 install:
-	@echo "📦 Instalando dependências..."
-	pip install -r requirements.txt
+	@echo "Instalando dependências..."
+	$(PIP) install -r requirements.txt
 
-# Limpa arquivos temporários
-clean:
-	@echo "🧹 Limpando arquivos temporários..."
-	find . -type d -name '__pycache__' -exec rm -r {} +
-	find . -name '*.pyc' -delete
-	rm -rf .pytest_cache .coverage htmlcov coverage.log interpolador.log
+# Execução de testes
+test:
+	@echo "Executando testes..."
+	$(PYTEST) $(PYTEST_ARGS)
 
-# Gera log de cobertura com timestamp
+# Cobertura de testes
+coverage:
+	@echo "Gerando relatório de cobertura..."
+	$(COVERAGE) run -m pytest
+	$(COVERAGE) report -m
+
+# Cobertura com relatório HTML
+coverage-html:
+	@echo "Gerando relatório de cobertura HTML..."
+	$(COVERAGE) run -m pytest
+	$(COVERAGE) html
+	@echo "Relatório HTML gerado em htmlcov/index.html"
+
+# Cobertura com log
 coverage-log:
-	@echo "🧾 Gerando log de cobertura com timestamp..."
-	@mkdir -p logs
-	@timestamp=$$(date +'%Y%m%d-%H%M%S'); \
-	coverage run -m pytest $(TEST_DIR) && \
-	coverage report > logs/coverage-$$timestamp.log
+	@echo "Gerando log de cobertura..."
+	$(COVERAGE) run -m pytest
+	$(COVERAGE) report -m > logs/coverage-$(shell date +%Y%m%d-%H%M%S).log
+	@echo "Log de cobertura gerado em logs/"
 
+# Limpeza de arquivos temporários
+clean:
+	@echo "Limpando arquivos temporários..."
+	find . -name "__pycache__" -type d -exec rm -rf {} +
+	find . -name "*.pyc" -delete
+	rm -f .coverage
+	rm -rf .pytest_cache
+	rm -rf htmlcov
+	@echo "Limpeza concluída!"
+
+# Limpeza profunda (inclui site gerado)
+clean-all: clean
+	@echo "Realizando limpeza completa..."
+	rm -rf $(SITE_DIR)
+	@echo "Limpeza completa concluída!"
+
+# Gerar documentação
+docs:
+	@echo "Gerando documentação..."
+	$(MKDOCS) build
+
+# Servir documentação localmente
+docs-serve:
+	@echo "Iniciando servidor de documentação..."
+	$(MKDOCS) serve
+
+# Verificação de estilo de código
+lint:
+	@echo "Verificando estilo de código..."
+	flake8 $(SRC_DIR)
+	black --check $(SRC_DIR)
+
+# Formatação automática de código
+format:
+	@echo "Formatando código..."
+	black $(SRC_DIR)
+	isort $(SRC_DIR)
+
+# Criar diretório de logs se não existir
+logs:
+	@mkdir -p logs
+
+# Ajuda
+help:
+	@echo "Alvos disponíveis:"
+	@echo "  all          : Executa testes, cobertura e gera documentação"
+	@echo "  install      : Instala dependências do projeto"
+	@echo "  test         : Executa testes"
+	@echo "  coverage     : Gera relatório de cobertura no terminal"
+	@echo "  coverage-html: Gera relatório de cobertura em HTML"
+	@echo "  coverage-log : Gera log de cobertura com timestamp"
+	@echo "  clean        : Remove arquivos temporários"
+	@echo "  clean-all    : Remove arquivos temporários e site gerado"
+	@echo "  docs         : Gera documentação"
+	@echo "  docs-serve   : Inicia servidor local de documentação"
+	@echo "  lint         : Verifica estilo de código"
+	@echo "  format       : Formata código automaticamente"
+	@echo "  help         : Exibe esta ajuda"
+
+# Garantir que o diretório de logs exista antes de gerar logs
+coverage-log: logs

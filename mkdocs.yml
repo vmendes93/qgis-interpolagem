@@ -2,7 +2,6 @@ site_name: Kit de Interpolação para o QGIS
 site_description: Biblioteca e futuro plugin para interpolação espacial com IDW, Krigagem e análise potenciométrica
 site_author: Vinicius Mendes
 repo_url: https://github.com/vmendes93/qgis-interpolagem
-site_url: https://vmenes93.github.io/qgis-interpolagem/
 theme:
   name: material
   language: pt-BR
@@ -12,25 +11,39 @@ theme:
     - scheme: default
       primary: teal
       accent: teal
-  font:
-    text: Roboto
-    code: Roboto Mono
   features:
     - navigation.sections
     - navigation.expand
     - navigation.top
     - toc.integrate
     - content.code.copy
-    - content.code.annotate
-    - search.suggest
-    - search.highlight
-    - search.share
-
 nav:
   - Início: index.md
-  - Módulos:
-      - Interpoladores: interpoladores.md
-      - Utilitários de Entrada/Saída: io_utils.md
-      - Utilitários Gerais: utils.md
+  - Guia do Usuário:
+      - Introdução: guia/introducao.md
+      - Instalação: guia/instalacao.md
+      - Primeiros Passos: guia/primeiros-passos.md
+  - Conceitos:
+      - Interpolação Espacial: conceitos/interpolacao-espacial.md
+      - IDW: conceitos/idw.md
+      - Krigagem: conceitos/krigagem.md
+      - Modelo Potenciométrico: conceitos/modelo-potenciometrico.md
+  - Referência:
+      - Interpoladores: referencia/interpoladores.md
+      - Utilitários de E/S: referencia/io-utils.md
+      - Utilitários Gerais: referencia/utils.md
+  - Tutoriais:
+      - Exemplo Básico: tutoriais/exemplo-basico.md
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 plugins:
   - search
