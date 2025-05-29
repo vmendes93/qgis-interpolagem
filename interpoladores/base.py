@@ -9,6 +9,7 @@ Classes:
 
 """
 
+
 class InterpoladorBase:
     """
     Classe base abstrata para interpoladores espaciais.
@@ -29,4 +30,3 @@ class InterpoladorBase:
             NotImplementedError: Se a subclasse não implementar este método.
         """
         raise NotImplementedError("Implemente esse método na subclasse.")
-

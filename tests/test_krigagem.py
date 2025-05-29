@@ -1,7 +1,8 @@
-import pytest
 import numpy as np
-from interpoladores.krigagem import Krigagem
+import pytest
+
 from interpoladores.config import KrigagemConfig
+from interpoladores.krigagem import Krigagem
 
 
 def gerar_grid(nx=5, ny=5, xmin=0, xmax=20, ymin=0, ymax=20):
@@ -37,7 +38,7 @@ def test_krigagem_simples():
     gridx, gridy = gerar_grid()
 
     # Usar KrigagemConfig em vez de passar modelo_variograma diretamente
-    config = KrigagemConfig(modelo_variograma='linear')
+    config = KrigagemConfig(modelo_variograma="linear")
     krig = Krigagem(x, y, z, config=config)
     zi = krig.interpolar(gridx, gridy)
 
@@ -92,9 +93,7 @@ def test_krigagem_com_config():
     gridx, gridy = gerar_grid()
 
     config = KrigagemConfig(
-        modelo_variograma='exponential',
-        anisotropy_angle=45.0,
-        anisotropy_ratio=2.0
+        modelo_variograma="exponential", anisotropy_angle=45.0, anisotropy_ratio=2.0
     )
 
     krig = Krigagem(x, y, z, config=config)
@@ -125,7 +124,9 @@ def test_krigagem_com_estatisticas():
     assert ss.shape == (5, 5)
 
     # Verifica que a variância é não-negativa (com tolerância para erros numéricos)
-    assert np.all(ss >= -1e-10)  # Tolerância para pequenos valores negativos devido a erros numéricos
+    assert np.all(
+        ss >= -1e-10
+    )  # Tolerância para pequenos valores negativos devido a erros numéricos
 
 
 def test_krigagem_validacao_entrada():
@@ -178,7 +179,7 @@ def test_krigagem_reproducibilidade():
     gridx, gridy = gerar_grid()
 
     # Usar KrigagemConfig em vez de passar modelo_variograma diretamente
-    config = KrigagemConfig(modelo_variograma='linear')
+    config = KrigagemConfig(modelo_variograma="linear")
     krig1 = Krigagem(x, y, z, config=config)
     krig2 = Krigagem(x, y, z, config=config)
 

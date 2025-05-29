@@ -1,13 +1,16 @@
 import numpy as np
 import pytest
-from interpoladores.idw import IDW
+
 from interpoladores.config import IDWConfig
+from interpoladores.idw import IDW
+
 
 def gerar_grid(nx=10, ny=10, xmin=0, xmax=50, ymin=0, ymax=50):
     """Gera uma grade regular para testes."""
     x = np.linspace(xmin, xmax, nx)
     y = np.linspace(ymin, ymax, ny)
     return np.meshgrid(x, y)
+
 
 def gerar_amostras(n_pontos=4):
     """Gera pontos de amostra para testes."""
@@ -23,6 +26,7 @@ def gerar_amostras(n_pontos=4):
 
     return pontos, valores
 
+
 def test_idw_padrao():
     """Testa o IDW com configuração padrão."""
     pontos, valores = gerar_amostras()
@@ -33,6 +37,7 @@ def test_idw_padrao():
 
     assert z.shape == grid_x.shape
     assert not np.any(np.isnan(z))
+
 
 def test_idw_com_n_neighbors():
     """Testa o IDW com número limitado de vizinhos."""
@@ -45,6 +50,7 @@ def test_idw_com_n_neighbors():
 
     assert z.shape == grid_x.shape
     assert not np.any(np.isnan(z))
+
 
 def test_idw_com_max_distance():
     """Testa o IDW com distância máxima configurada."""
@@ -63,6 +69,7 @@ def test_idw_com_max_distance():
 
     # Verifica que os valores não NaN são válidos (ou seja, interpolação ocorreu onde possível)
     assert np.isfinite(z[~np.isnan(z)]).all()
+
 
 def test_idw_com_default_value():
     """Testa o IDW com valor padrão para pontos sem vizinhos."""
@@ -84,6 +91,7 @@ def test_idw_com_default_value():
     mask = np.abs(z - default_value) < 1e-10
     assert mask.any()  # Deve haver pelo menos um ponto com valor padrão
 
+
 def test_idw_com_power_diferente():
     """Testa o IDW com diferentes valores de power."""
     pontos, valores = gerar_amostras()
@@ -99,6 +107,7 @@ def test_idw_com_power_diferente():
     z2 = idw2.interpolar(pontos, valores, grid_x, grid_y)
 
     assert not np.allclose(z1, z2)
+
 
 def test_idw_validacao_entrada():
     """Testa a validação de entrada do IDW."""
@@ -128,6 +137,7 @@ def test_idw_validacao_entrada():
         idw.interpolar(pontos, np.array([1.0, 2.0, 3.0]), grid_x, grid_y_invalido)
     assert "Grades X e Y devem ter o mesmo formato" in str(excinfo.value)
 
+
 def test_idw_sem_vizinhos_validos():
     """Testa o comportamento do IDW quando não há vizinhos válidos."""
     pontos = np.array([[10, 10], [20, 15]])
@@ -142,6 +152,7 @@ def test_idw_sem_vizinhos_validos():
         idw.interpolar(pontos, valores, grid_x, grid_y)
     assert "Nenhum ponto tem vizinhos dentro da distância máxima" in str(excinfo.value)
 
+
 def test_idw_grade_grande():
     """Testa o IDW com uma grade grande para verificar desempenho."""
     pontos, valores = gerar_amostras(n_pontos=20)
@@ -152,6 +163,7 @@ def test_idw_grade_grande():
 
     assert z.shape == grid_x.shape
     assert not np.any(np.isnan(z))
+
 
 def test_idw_reproducibilidade():
     """Testa se o IDW produz resultados consistentes para as mesmas entradas."""

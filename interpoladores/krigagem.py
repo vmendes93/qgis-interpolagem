@@ -19,13 +19,16 @@ Dependências:
     - pykrige: Implementação de algoritmos de Krigagem
 """
 
-from pykrige.ok import OrdinaryKriging
-import numpy as np
-from typing import Tuple, Optional, Dict, Any, Union
-from interpoladores.config import KrigagemConfig
-from .base import InterpoladorBase
-from utils.logging_utils import InterpoladorLogger
 import logging
+from typing import Any, Dict, Optional, Tuple, Union
+
+import numpy as np
+from pykrige.ok import OrdinaryKriging
+
+from interpoladores.config import KrigagemConfig
+from utils.logging_utils import InterpoladorLogger
+
+from .base import InterpoladorBase
 
 
 class Krigagem(InterpoladorBase):
@@ -87,7 +90,7 @@ class Krigagem(InterpoladorBase):
         *,
         config: KrigagemConfig = None,
         verbose: bool = False,
-        arquivo_log: Optional[str] = None
+        arquivo_log: Optional[str] = None,
     ):
         """
         Inicializa o interpolador de Krigagem.
@@ -121,16 +124,11 @@ class Krigagem(InterpoladorBase):
         # Configura o logger
         nivel_log = logging.DEBUG if verbose else logging.INFO
         self.logger = InterpoladorLogger(
-            "Krigagem",
-            nivel=nivel_log,
-            arquivo_log=arquivo_log,
-            console=verbose
+            "Krigagem", nivel=nivel_log, arquivo_log=arquivo_log, console=verbose
         )
 
     def interpolar(
-        self,
-        gridx: np.ndarray,
-        gridy: np.ndarray
+        self, gridx: np.ndarray, gridy: np.ndarray
     ) -> Union[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
         """
         Executa a Krigagem Ordinária sobre a grade fornecida.
@@ -164,18 +162,20 @@ class Krigagem(InterpoladorBase):
 
             # Preparação dos parâmetros para o PyKrige
             kwargs = {
-                'variogram_model': self.config.modelo_variograma,
-                'verbose': self.config.verbose,
-                'anisotropy_angle': self.config.anisotropy_angle,
-                'anisotropy_scaling': self.config.anisotropy_ratio,
+                "variogram_model": self.config.modelo_variograma,
+                "verbose": self.config.verbose,
+                "anisotropy_angle": self.config.anisotropy_angle,
+                "anisotropy_scaling": self.config.anisotropy_ratio,
             }
 
             # Adiciona parâmetros opcionais se fornecidos
             if self.config.nlags is not None:
-                kwargs['nlags'] = self.config.nlags
+                kwargs["nlags"] = self.config.nlags
 
             if self.config.variogram_model_parameters is not None:
-                kwargs['variogram_model_parameters'] = self.config.variogram_model_parameters
+                kwargs["variogram_model_parameters"] = (
+                    self.config.variogram_model_parameters
+                )
 
             self.logger.registrar_progresso(
                 20, f"Parâmetros configurados: {self.config.modelo_variograma}"
@@ -184,10 +184,7 @@ class Krigagem(InterpoladorBase):
             # Executa a Krigagem
             try:
                 self.logger.registrar_progresso(30, "Iniciando cálculo do variograma")
-                ok = OrdinaryKriging(
-                    self.x, self.y, self.z,
-                    **kwargs
-                )
+                ok = OrdinaryKriging(self.x, self.y, self.z, **kwargs)
                 self.logger.registrar_progresso(
                     60, "Variograma calculado, iniciando interpolação"
                 )

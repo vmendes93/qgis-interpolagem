@@ -16,7 +16,7 @@ import logging
 import os
 import sys
 from datetime import datetime
-from typing import Optional, Union, List
+from typing import List, Optional, Union
 
 
 def configurar_logger(
@@ -97,7 +97,9 @@ class InterpoladorLogger:
         Inicializa o logger para o interpolador.
         """
         self.nome = nome
-        self.logger = configurar_logger(nome, nivel, arquivo_log=arquivo_log, console=console)
+        self.logger = configurar_logger(
+            nome, nivel, arquivo_log=arquivo_log, console=console
+        )
         self.inicio = None
 
     def iniciar_interpolacao(self, info: Optional[str] = None) -> None:
@@ -113,7 +115,9 @@ class InterpoladorLogger:
             msg += f": {info}"
         self.logger.info(msg)
 
-    def registrar_progresso(self, percentual: float, info: Optional[str] = None) -> None:
+    def registrar_progresso(
+        self, percentual: float, info: Optional[str] = None
+    ) -> None:
         """
         Registra o progresso de uma operação de interpolação.
 
@@ -135,7 +139,9 @@ class InterpoladorLogger:
         """
         if self.inicio:
             duracao = datetime.now() - self.inicio
-            msg = f"Interpolação {self.nome} concluída em {duracao.total_seconds():.2f}s"
+            msg = (
+                f"Interpolação {self.nome} concluída em {duracao.total_seconds():.2f}s"
+            )
         else:
             msg = f"Interpolação {self.nome} concluída"
 

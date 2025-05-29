@@ -19,12 +19,14 @@ Dependências:
     - scipy.spatial.cKDTree: Para busca eficiente de vizinhos próximos
 """
 
-from interpoladores.config import IDWConfig
+import logging
+from typing import Optional
+
 import numpy as np
 from scipy.spatial import cKDTree
-from typing import Optional
+
+from interpoladores.config import IDWConfig
 from utils.logging_utils import InterpoladorLogger
-import logging
 
 
 class IDW:
@@ -74,7 +76,7 @@ class IDW:
         self,
         config: IDWConfig = IDWConfig(),
         verbose: bool = False,
-        arquivo_log: Optional[str] = None
+        arquivo_log: Optional[str] = None,
     ):
         """
         Inicializa o interpolador IDW.
@@ -91,10 +93,7 @@ class IDW:
         # Configura o logger
         nivel_log = logging.DEBUG if verbose else logging.INFO
         self.logger = InterpoladorLogger(
-            "IDW",
-            nivel=nivel_log,
-            arquivo_log=arquivo_log,
-            console=verbose
+            "IDW", nivel=nivel_log, arquivo_log=arquivo_log, console=verbose
         )
 
     def interpolar(self, pontos, valores, grid_x, grid_y):
@@ -167,7 +166,8 @@ class IDW:
             else:
                 # Usa todos os pontos disponíveis
                 self.logger.registrar_progresso(
-                    30, f"Buscando todos os {len(pontos)} pontos para cada ponto da grade"
+                    30,
+                    f"Buscando todos os {len(pontos)} pontos para cada ponto da grade",
                 )
                 dist, idx = tree.query(xi, k=len(pontos))
 
@@ -188,11 +188,17 @@ class IDW:
                         70, f"{n_invalid} pontos da grade sem vizinhos válidos"
                     )
 
-                    if hasattr(self.config, 'default_value') and self.config.default_value is not None:
+                    if (
+                        hasattr(self.config, "default_value")
+                        and self.config.default_value is not None
+                    ):
                         # Se um valor padrão foi configurado, usa-o para pontos sem vizinhos
-                        z_interp = np.full(xi.shape[0], self.config.default_value, dtype=float)
+                        z_interp = np.full(
+                            xi.shape[0], self.config.default_value, dtype=float
+                        )
                         self.logger.registrar_progresso(
-                            75, f"Usando valor padrão {self.config.default_value} para pontos sem vizinhos"
+                            75,
+                            f"Usando valor padrão {self.config.default_value} para pontos sem vizinhos",
                         )
                     else:
                         # Caso contrário, usa NaN para pontos sem vizinhos
@@ -254,9 +260,7 @@ class IDW:
 
             self.logger.registrar_progresso(100, "Interpolação concluída")
 
-            self.logger.concluir_interpolacao(
-                f"Grade interpolada: {result.shape}"
-            )
+            self.logger.concluir_interpolacao(f"Grade interpolada: {result.shape}")
             return result
 
         except Exception as e:

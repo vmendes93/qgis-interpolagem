@@ -1,0 +1,226 @@
+# Exemplos
+
+Esta página contém exemplos práticos de uso do Kit de Interpolação para diferentes cenários.
+
+## Exemplo 1: Interpolação IDW com Visualização
+
+Este exemplo demonstra como realizar uma interpolação IDW e visualizar os resultados.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from interpoladores.idw import IDW
+from interpoladores.config import IDWConfig
+from utils.grid_utils import criar_grade_regular
+
+# Criar dados de exemplo (pontos aleatórios)
+np.random.seed(42)  # Para reprodutibilidade
+n_pontos = 20
+x = np.random.rand(n_pontos) * 100
+y = np.random.rand(n_pontos) * 100
+z = 10 * np.sin(x/10) + 5 * np.cos(y/10) + np.random.rand(n_pontos) * 2
+
+pontos = np.column_stack((x, y))
+
+# Criar grade regular para interpolação
+grid_x, grid_y = criar_grade_regular(0, 100, 0, 100, 100, 100)
+
+# Configurar e executar interpolação IDW
+config = IDWConfig(
+    power=2.5,           # Expoente da distância
+    n_neighbors=5,       # Número de vizinhos
+    max_distance=30.0    # Distância máxima
+)
+
+idw = IDW(config)
+z_interp = idw.interpolar(pontos, z, grid_x, grid_y)
+
+# Visualizar resultado
+plt.figure(figsize=(12, 10))
+
+# Plotar superfície interpolada
+contour = plt.contourf(grid_x, grid_y, z_interp, 20, cmap='viridis')
+plt.colorbar(contour, label='Valor')
+
+# Plotar pontos amostrais
+scatter = plt.scatter(x, y, c=z, s=80, edgecolor='k', cmap='viridis')
+plt.colorbar(scatter, label='Valor Amostral')
+
+plt.title('Interpolação IDW', fontsize=14)
+plt.xlabel('X', fontsize=12)
+plt.ylabel('Y', fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+
+# Salvar figura
+plt.savefig('idw_interpolacao.png', dpi=300)
+plt.show()
+```
+
+## Exemplo 2: Comparação entre Métodos de Interpolação
+
+Este exemplo compara os resultados de IDW e Krigagem para o mesmo conjunto de dados.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from interpoladores.idw import IDW
+from interpoladores.config import IDWConfig
+from interpoladores.krigagem import Krigagem
+from interpoladores.config import KrigagemConfig
+from utils.grid_utils import criar_grade_regular
+
+# Criar dados de exemplo
+np.random.seed(42)
+n_pontos = 30
+x = np.random.rand(n_pontos) * 100
+y = np.random.rand(n_pontos) * 100
+z = 10 * np.sin(x/20) + 8 * np.cos(y/20) + np.random.rand(n_pontos) * 3
+
+pontos = np.column_stack((x, y))
+
+# Criar grade regular para interpolação
+grid_x, grid_y = criar_grade_regular(0, 100, 0, 100, 80, 80)
+
+# Configurar e executar IDW
+idw_config = IDWConfig(power=2.0, n_neighbors=7)
+idw = IDW(idw_config)
+z_idw = idw.interpolar(pontos, z, grid_x, grid_y)
+
+# Configurar e executar Krigagem
+krig_config = KrigagemConfig(modelo_variograma='spherical')
+krig = Krigagem(x, y, z, config=krig_config)
+z_krig = krig.interpolar(grid_x, grid_y)
+
+# Visualizar resultados
+fig, axes = plt.subplots(1, 2, figsize=(16, 7))
+
+# IDW
+im1 = axes[0].contourf(grid_x, grid_y, z_idw, 20, cmap='viridis')
+axes[0].scatter(x, y, c='red', s=30, edgecolor='k')
+axes[0].set_title('Interpolação IDW', fontsize=14)
+axes[0].set_xlabel('X', fontsize=12)
+axes[0].set_ylabel('Y', fontsize=12)
+axes[0].grid(True, alpha=0.3)
+plt.colorbar(im1, ax=axes[0], label='Valor')
+
+# Krigagem
+im2 = axes[1].contourf(grid_x, grid_y, z_krig, 20, cmap='viridis')
+axes[1].scatter(x, y, c='red', s=30, edgecolor='k')
+axes[1].set_title('Krigagem Ordinária', fontsize=14)
+axes[1].set_xlabel('X', fontsize=12)
+axes[1].set_ylabel('Y', fontsize=12)
+axes[1].grid(True, alpha=0.3)
+plt.colorbar(im2, ax=axes[1], label='Valor')
+
+plt.tight_layout()
+plt.savefig('comparacao_metodos.png', dpi=300)
+plt.show()
+```
+
+## Exemplo 3: Modelo Potenciométrico com Vetores de Fluxo
+
+Este exemplo demonstra como calcular e visualizar vetores de fluxo a partir de uma superfície potenciométrica.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from interpoladores.idw import IDW
+from interpoladores.config import IDWConfig
+from interpoladores.modelo_potenciometrico import ModeloPotenciometrico, plotar_vetores_fluxo
+from utils.grid_utils import criar_grade_regular
+
+# Criar dados de exemplo (níveis potenciométricos)
+np.random.seed(42)
+n_pontos = 25
+x = np.random.rand(n_pontos) * 100
+y = np.random.rand(n_pontos) * 100
+
+# Simulando uma superfície potenciométrica com gradiente geral de nordeste para sudoeste
+z = 100 - 0.5*x - 0.3*y + np.random.rand(n_pontos) * 5
+
+pontos = np.column_stack((x, y))
+
+# Criar grade regular para interpolação
+grid_x, grid_y = criar_grade_regular(0, 100, 0, 100, 40, 40)
+
+# Interpolar superfície potenciométrica
+idw = IDW(IDWConfig(power=2.0, n_neighbors=8))
+z_interp = idw.interpolar(pontos, z, grid_x, grid_y)
+
+# Calcular vetores de fluxo
+modelo = ModeloPotenciometrico(grid_x, grid_y, z_interp)
+fx, fy = modelo.calcular_fluxo()
+
+# Visualizar resultados
+plt.figure(figsize=(12, 10))
+
+# Plotar superfície potenciométrica
+contour = plt.contourf(grid_x, grid_y, z_interp, 15, cmap='Blues', alpha=0.7)
+plt.colorbar(contour, label='Nível Potenciométrico')
+
+# Plotar contornos
+contour_lines = plt.contour(grid_x, grid_y, z_interp, 15, colors='black', alpha=0.5)
+plt.clabel(contour_lines, inline=True, fontsize=8)
+
+# Plotar pontos amostrais
+plt.scatter(x, y, c=z, s=60, edgecolor='k', cmap='Blues')
+
+# Plotar vetores de fluxo
+plt.quiver(grid_x[::2, ::2], grid_y[::2, ::2], 
+           fx[::2, ::2], fy[::2, ::2], 
+           color='red', scale=20, width=0.002)
+
+plt.title('Superfície Potenciométrica e Vetores de Fluxo', fontsize=14)
+plt.xlabel('X', fontsize=12)
+plt.ylabel('Y', fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+
+plt.savefig('modelo_potenciometrico.png', dpi=300)
+plt.show()
+```
+
+## Exemplo 4: Leitura e Exportação de Dados
+
+Este exemplo demonstra como ler dados de um arquivo CSV e exportar os resultados como raster.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from interpoladores.idw import IDW
+from interpoladores.config import IDWConfig
+from io_utils.leitor import ler_pontos_csv
+from io_utils.exportador import exportar_raster
+from utils.grid_utils import criar_grade_regular
+
+# Ler pontos de um arquivo CSV
+# Formato esperado: x,y,valor
+pontos, valores = ler_pontos_csv('dados.csv', delimitador=',', colunas=['x', 'y', 'valor'])
+
+# Criar grade regular para interpolação
+x_min, x_max = pontos[:, 0].min(), pontos[:, 0].max()
+y_min, y_max = pontos[:, 1].min(), pontos[:, 1].max()
+grid_x, grid_y = criar_grade_regular(x_min, x_max, y_min, y_max, 200, 200)
+
+# Configurar e executar interpolação
+config = IDWConfig(power=2.0, n_neighbors=10)
+idw = IDW(config)
+z_interp = idw.interpolar(pontos, valores, grid_x, grid_y)
+
+# Visualizar resultado
+plt.figure(figsize=(10, 8))
+plt.contourf(grid_x, grid_y, z_interp, 20, cmap='viridis')
+plt.colorbar(label='Valor')
+plt.scatter(pontos[:, 0], pontos[:, 1], c='red', s=30, edgecolor='k')
+plt.title('Interpolação de Dados do CSV')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('interpolacao_csv.png', dpi=300)
+
+# Exportar resultado como raster
+exportar_raster(grid_x, grid_y, z_interp, 'resultado.tif', sistema_coord='EPSG:4326')
+print("Raster exportado com sucesso para 'resultado.tif'")
+```

@@ -22,12 +22,15 @@ Dependências:
     - numpy: Para operações numéricas eficientes
     - matplotlib: Para visualização dos vetores de fluxo
 """
-import numpy as np
-import matplotlib.pyplot as plt
-from dataclasses import dataclass, field
-from typing import Tuple, Optional, Union
-from utils.logging_utils import InterpoladorLogger, configurar_logger
+
 import logging
+from dataclasses import dataclass, field
+from typing import Optional, Tuple, Union
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from utils.logging_utils import InterpoladorLogger, configurar_logger
 
 
 @dataclass
@@ -75,6 +78,7 @@ class ModeloPotenciometrico:
         >>> # Visualizar os vetores
         >>> plotar_vetores_fluxo(grid_x, grid_y, flow_x, flow_y, densidade=2)
     """
+
     grid_x: np.ndarray
     grid_y: np.ndarray
     z: np.ndarray
@@ -99,7 +103,7 @@ class ModeloPotenciometrico:
             "ModeloPotenciometrico",
             nivel=nivel_log,
             arquivo_log=self.arquivo_log,
-            console=self.verbose
+            console=self.verbose,
         )
 
     def calcular_gradiente(self) -> Tuple[np.ndarray, np.ndarray]:
@@ -167,7 +171,9 @@ class ModeloPotenciometrico:
             flow_x = -grad_x
             flow_y = -grad_y
 
-            self.logger.registrar_progresso(100, "Cálculo dos vetores de fluxo concluído")
+            self.logger.registrar_progresso(
+                100, "Cálculo dos vetores de fluxo concluído"
+            )
             self.logger.concluir_interpolacao()
 
             return flow_x, flow_y
@@ -189,7 +195,7 @@ def plotar_vetores_fluxo(
     title: str = "Vetores de Fluxo",
     densidade: int = 1,
     escala: float = 1.0,
-    cor: str = 'blue',
+    cor: str = "blue",
     salvar_como: Optional[str] = None,
 ) -> plt.Figure:
     """
@@ -216,7 +222,11 @@ def plotar_vetores_fluxo(
 
     try:
         # Validação de dimensões
-        if grid_x.shape != grid_y.shape or grid_x.shape != fx.shape or grid_x.shape != fy.shape:
+        if (
+            grid_x.shape != grid_y.shape
+            or grid_x.shape != fx.shape
+            or grid_x.shape != fy.shape
+        ):
             erro_msg = (
                 f"Dimensões incompatíveis: grid_x({grid_x.shape}), grid_y({grid_y.shape}), "
                 f"fx({fx.shape}), fy({fy.shape})"
@@ -234,9 +244,9 @@ def plotar_vetores_fluxo(
             fx[::densidade, ::densidade],
             fy[::densidade, ::densidade],
             angles="xy",
-            scale_units='xy',
+            scale_units="xy",
             scale=escala,
-            color=cor
+            color=cor,
         )
 
         plt.title(title)
@@ -249,7 +259,7 @@ def plotar_vetores_fluxo(
         # Salva a figura se um caminho for especificado
         if salvar_como:
             logger_global.info(f"Salvando figura em {salvar_como}")
-            plt.savefig(salvar_como, dpi=300, bbox_inches='tight')
+            plt.savefig(salvar_como, dpi=300, bbox_inches="tight")
 
         logger_global.info("Plotagem de vetores de fluxo concluída")
         return fig
@@ -279,11 +289,12 @@ def calcular_gradiente_superficie(
             - fy (np.ndarray): Gradiente no eixo Y (invertido).
     """
     import warnings
+
     warnings.warn(
         "calcular_gradiente_superficie() está obsoleta. "
         "Use ModeloPotenciometrico.calcular_fluxo() em vez disso.",
         DeprecationWarning,
-        stacklevel=2
+        stacklevel=2,
     )
 
     logger_global.warning(

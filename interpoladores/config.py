@@ -11,7 +11,7 @@ Classes:
 """
 
 from dataclasses import dataclass
-from typing import Optional, Dict, Any, List, Union
+from typing import Any, Dict, List, Optional, Union
 
 
 @dataclass
@@ -34,6 +34,7 @@ class IDWConfig:
         default_value (float, optional): Valor padrão para células sem vizinhos válidos.
                                         Se None, usa NaN. Default é None.
     """
+
     power: float = 2.0
     n_neighbors: Optional[int] = None
     max_distance: Optional[float] = None
@@ -70,7 +71,8 @@ class KrigagemConfig:
         enable_statistics (bool, optional): Se True, calcula e retorna estatísticas de erro.
             Permite avaliar a incerteza da interpolação. Default é False.
     """
-    modelo_variograma: str = 'spherical'
+
+    modelo_variograma: str = "spherical"
     nlags: Optional[int] = None
     variogram_model_parameters: Optional[Dict[str, Any]] = None
     anisotropy_angle: float = 0.0

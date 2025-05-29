@@ -1,30 +1,39 @@
-# Kit de Interpolação para o QGIS
+# Kit de Interpolação para QGIS
 
-**Kit de ferramentas para interpolação espacial, com suporte a métodos como IDW, Krigagem e geração de modelo potenciométrico.**
+Ferramentas de interpolação espacial para QGIS, incluindo métodos IDW, Krigagem e modelo potenciométrico.
 
-![Logo](assets/logo.png)
+![Logo do Projeto](assets/logo.png)
 
 ## Visão Geral
 
-Este projeto fornece uma biblioteca Python para interpolação espacial, com foco em aplicações geoespaciais. Desenvolvido para eventual integração com o QGIS como plugin, o kit oferece implementações robustas de métodos de interpolação comumente usados em geociências, hidrologia e outras áreas que trabalham com dados espaciais.
+Este projeto fornece algoritmos de interpolação espacial otimizados para uso com QGIS:
 
-## Principais Funcionalidades
+- **IDW (Inverse Distance Weighting)**: Interpolação baseada na distância inversa ponderada
+- **Krigagem**: Método geoestatístico avançado com diferentes modelos de variograma
+- **Modelo Potenciométrico**: Cálculo de gradientes e vetores de fluxo
 
-- **Interpolação IDW** com configuração ajustável de expoente, vizinhos e distância máxima
-- **Krigagem Ordinária** com diferentes modelos de variograma e suporte a anisotropia
-- **Modelo Potenciométrico** para cálculo de gradientes e vetores de fluxo
-- **Sistema de Logging** para monitoramento detalhado do progresso
-- **Testes Automatizados** com alta cobertura de código
+## Instalação
 
-## Começando
+```bash
+# Clone o repositório
+git clone https://github.com/vmendes93/qgis-interpolagem.git
 
-Para começar a usar o Kit de Interpolação:
+# Entre no diretório
+cd qgis-interpolagem
+
+# Instale as dependências
+pip install -r requirements.txt
+
+# Instale em modo de desenvolvimento
+pip install -e .
+```
+
+## Exemplo Rápido
 
 ```python
 from interpoladores.idw import IDW
 from interpoladores.config import IDWConfig
 import numpy as np
-```
 
 # Pontos conhecidos
 pontos = np.array([[0, 0], [1, 0], [0, 1], [1, 1]])
@@ -41,10 +50,15 @@ config = IDWConfig(power=2.0, n_neighbors=3)
 # Interpolação
 idw = IDW(config)
 z = idw.interpolar(pontos, valores, grid_x, grid_y)
+```
 
-# Navegação
+## Documentação
 
-- [Guia do Usuário](guia): Introdução, instalação e primeiros passos
-- [Conceitos](conceitos): Fundamentos teóricos dos métodos implementados
-- [Referência](referencia): Documentação detalhada das classes e funções
-- [Tutoriais](tutoriais): Exemplos práticos passo a passo
+- [Guia de Início Rápido](quickstart.md)
+- [Conceitos de Interpolação](conceitos.md)
+- [Referência da API](api.md)
+- [Exemplos](exemplos.md)
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](https://github.com/vmendes93/qgis-interpolagem/blob/main/LICENSE) para detalhes.

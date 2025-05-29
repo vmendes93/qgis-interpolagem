@@ -16,6 +16,7 @@ Dependências esperadas:
 
 """
 
+
 def exportar_raster(matriz, path):
     """
     Exporta uma matriz como arquivo raster.
@@ -29,4 +30,3 @@ def exportar_raster(matriz, path):
         futura deve usar GDAL, rasterio ou APIs do QGIS.
     """
     raise NotImplementedError("Implementar exportação com GDAL, rasterio ou QGIS.")
-

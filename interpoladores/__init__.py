@@ -12,4 +12,3 @@ Recursos:
 - Estrutura modular e testável
 - Compatível com Python 3.10+
 """
-
