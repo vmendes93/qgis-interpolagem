@@ -41,3 +41,10 @@ config = IDWConfig(power=2.0, n_neighbors=3)
 # Interpolação
 idw = IDW(config)
 z = idw.interpolar(pontos, valores, grid_x, grid_y)
+
+# Navegação
+
+- [Guia do Usuário](guia): Introdução, instalação e primeiros passos
+- [Conceitos](conceitos): Fundamentos teóricos dos métodos implementados
+- [Referência](referencia): Documentação detalhada das classes e funções
+- [Tutoriais](tutoriais): Exemplos práticos passo a passo
