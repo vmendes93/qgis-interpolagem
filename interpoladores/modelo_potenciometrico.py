@@ -28,7 +28,7 @@ from dataclasses import dataclass, field
 from typing import Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
-import numpy as np
+import numpy as np # noqa: F401
 
 from utils.logging_utils import InterpoladorLogger, configurar_logger
 

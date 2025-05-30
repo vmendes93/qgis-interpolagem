@@ -22,7 +22,7 @@ Dependências:
 import logging
 from typing import Any, Dict, Optional, Tuple, Union
 
-import numpy as np
+import numpy as np # noqa: F401
 from pykrige.ok import OrdinaryKriging
 
 from interpoladores.config import KrigagemConfig

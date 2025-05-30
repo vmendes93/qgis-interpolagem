@@ -22,8 +22,8 @@ Dependências:
 import logging
 from typing import Optional
 
-import numpy as np
-from scipy.spatial import cKDTree
+import numpy as np # noqa: F401
+from scipy.spatial import cKDTree # noqa: F401
 
 from interpoladores.config import IDWConfig
 from utils.logging_utils import InterpoladorLogger

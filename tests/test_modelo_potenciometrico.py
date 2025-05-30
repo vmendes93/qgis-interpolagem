@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import matplotlib.pyplot as plt # noqa: F401
+import numpy as np # noqa: F401
 import pytest
 
 from interpoladores.modelo_potenciometrico import (
