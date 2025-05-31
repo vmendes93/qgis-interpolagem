@@ -28,7 +28,7 @@ from dataclasses import dataclass, field
 from typing import Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
-import numpy as np # noqa: F401
+import numpy as np  # noqa: F401
 
 from utils.logging_utils import InterpoladorLogger, configurar_logger
 
@@ -128,9 +128,7 @@ class ModeloPotenciometrico:
             dx = np.mean(np.diff(self.grid_x[0]))
             dy = np.mean(np.diff(self.grid_y[:, 0]))
 
-            self.logger.registrar_progresso(
-                30, f"Espaçamento da grade: dx={dx:.4f}, dy={dy:.4f}"
-            )
+            self.logger.registrar_progresso(30, f"Espaçamento da grade: dx={dx:.4f}, dy={dy:.4f}")
 
             # Calcula o gradiente
             grad_y, grad_x = np.gradient(self.z, dy, dx)
@@ -171,9 +169,7 @@ class ModeloPotenciometrico:
             flow_x = -grad_x
             flow_y = -grad_y
 
-            self.logger.registrar_progresso(
-                100, "Cálculo dos vetores de fluxo concluído"
-            )
+            self.logger.registrar_progresso(100, "Cálculo dos vetores de fluxo concluído")
             self.logger.concluir_interpolacao()
 
             return flow_x, flow_y
@@ -222,11 +218,7 @@ def plotar_vetores_fluxo(
 
     try:
         # Validação de dimensões
-        if (
-            grid_x.shape != grid_y.shape
-            or grid_x.shape != fx.shape
-            or grid_x.shape != fy.shape
-        ):
+        if grid_x.shape != grid_y.shape or grid_x.shape != fx.shape or grid_x.shape != fy.shape:
             erro_msg = (
                 f"Dimensões incompatíveis: grid_x({grid_x.shape}), grid_y({grid_y.shape}), "
                 f"fx({fx.shape}), fy({fy.shape})"

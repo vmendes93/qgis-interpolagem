@@ -35,6 +35,4 @@ def ler_pontos(path):
         NotImplementedError: Função ainda não implementada.
         A implementação futura deve utilizar geopandas, fiona ou APIs do QGIS.
     """
-    raise NotImplementedError(
-        "Implementar leitura de shapefile, GeoJSON ou camada QGIS."
-    )
+    raise NotImplementedError("Implementar leitura de shapefile, GeoJSON ou camada QGIS.")

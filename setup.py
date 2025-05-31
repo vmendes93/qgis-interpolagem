@@ -12,7 +12,7 @@ setup(
         "numpy",
         "matplotlib",
         "scipy",
-        "matplotlib"
+        "matplotlib",
         "pykrige",
     ],
     classifiers=[

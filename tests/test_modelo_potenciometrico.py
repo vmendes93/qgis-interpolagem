@@ -1,9 +1,12 @@
-import matplotlib.pyplot as plt # noqa: F401
-import numpy as np # noqa: F401
+import matplotlib.pyplot as plt  # noqa: F401
+import numpy as np  # noqa: F401
 import pytest
 
 from interpoladores.modelo_potenciometrico import (
-    ModeloPotenciometrico, calcular_gradiente_superficie, plotar_vetores_fluxo)
+    ModeloPotenciometrico,
+    calcular_gradiente_superficie,
+    plotar_vetores_fluxo,
+)
 
 
 def gerar_grid(nx=5, ny=5, xmin=0, xmax=10, ymin=0, ymax=10):
@@ -129,27 +132,19 @@ def test_superficie_complexa():
     # Calculamos a média dos fluxos em diferentes regiões
 
     # Região à esquerda do centro deve ter fluxo predominantemente positivo em X
-    fluxo_medio_esquerda = np.mean(
-        flow_x[centro_i - 8 : centro_i - 3, centro_j - 2 : centro_j + 3]
-    )
+    fluxo_medio_esquerda = np.mean(flow_x[centro_i - 8 : centro_i - 3, centro_j - 2 : centro_j + 3])
     assert fluxo_medio_esquerda > -0.5  # Valor menos restritivo
 
     # Região à direita do centro deve ter fluxo predominantemente negativo em X
-    fluxo_medio_direita = np.mean(
-        flow_x[centro_i + 3 : centro_i + 8, centro_j - 2 : centro_j + 3]
-    )
+    fluxo_medio_direita = np.mean(flow_x[centro_i + 3 : centro_i + 8, centro_j - 2 : centro_j + 3])
     assert fluxo_medio_direita < 0.5  # Valor menos restritivo
 
     # Região abaixo do centro deve ter fluxo predominantemente positivo em Y
-    fluxo_medio_abaixo = np.mean(
-        flow_y[centro_i - 2 : centro_i + 3, centro_j - 8 : centro_j - 3]
-    )
+    fluxo_medio_abaixo = np.mean(flow_y[centro_i - 2 : centro_i + 3, centro_j - 8 : centro_j - 3])
     assert fluxo_medio_abaixo > -0.5  # Valor menos restritivo
 
     # Região acima do centro deve ter fluxo predominantemente negativo em Y
-    fluxo_medio_acima = np.mean(
-        flow_y[centro_i - 2 : centro_i + 3, centro_j + 3 : centro_j + 8]
-    )
+    fluxo_medio_acima = np.mean(flow_y[centro_i - 2 : centro_i + 3, centro_j + 3 : centro_j + 8])
     assert fluxo_medio_acima < 0.5  # Valor menos restritivo
 
 

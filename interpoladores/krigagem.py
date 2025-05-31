@@ -22,7 +22,7 @@ Dependências:
 import logging
 from typing import Any, Dict, Optional, Tuple, Union
 
-import numpy as np # noqa: F401
+import numpy as np  # noqa: F401
 from pykrige.ok import OrdinaryKriging
 
 from interpoladores.config import KrigagemConfig
@@ -107,14 +107,10 @@ class Krigagem(InterpoladorBase):
         """
         # Validação de entrada
         if len(x) != len(y) or len(x) != len(z):
-            raise ValueError(
-                f"Dimensões incompatíveis: x({len(x)}), y({len(y)}), z({len(z)})"
-            )
+            raise ValueError(f"Dimensões incompatíveis: x({len(x)}), y({len(y)}), z({len(z)})")
 
         if len(x) < 3:
-            raise ValueError(
-                f"Krigagem requer pelo menos 3 pontos, mas recebeu {len(x)}"
-            )
+            raise ValueError(f"Krigagem requer pelo menos 3 pontos, mas recebeu {len(x)}")
 
         self.x = np.asarray(x)
         self.y = np.asarray(y)
@@ -173,9 +169,7 @@ class Krigagem(InterpoladorBase):
                 kwargs["nlags"] = self.config.nlags
 
             if self.config.variogram_model_parameters is not None:
-                kwargs["variogram_model_parameters"] = (
-                    self.config.variogram_model_parameters
-                )
+                kwargs["variogram_model_parameters"] = self.config.variogram_model_parameters
 
             self.logger.registrar_progresso(
                 20, f"Parâmetros configurados: {self.config.modelo_variograma}"
@@ -185,9 +179,7 @@ class Krigagem(InterpoladorBase):
             try:
                 self.logger.registrar_progresso(30, "Iniciando cálculo do variograma")
                 ok = OrdinaryKriging(self.x, self.y, self.z, **kwargs)
-                self.logger.registrar_progresso(
-                    60, "Variograma calculado, iniciando interpolação"
-                )
+                self.logger.registrar_progresso(60, "Variograma calculado, iniciando interpolação")
 
                 z_interp, ss = ok.execute("grid", gridx, gridy)
 
@@ -200,9 +192,7 @@ class Krigagem(InterpoladorBase):
                     )
                     return z_interp, ss
                 else:
-                    self.logger.concluir_interpolacao(
-                        f"Grade interpolada: {z_interp.shape}"
-                    )
+                    self.logger.concluir_interpolacao(f"Grade interpolada: {z_interp.shape}")
                     return z_interp
 
             except Exception as e:

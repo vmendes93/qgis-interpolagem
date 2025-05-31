@@ -22,11 +22,13 @@ Dependências:
 import logging
 from typing import Optional
 
-import numpy as np # noqa: F401
-from scipy.spatial import cKDTree # noqa: F401
+import numpy as np  # noqa: F401
 
 from interpoladores.config import IDWConfig
 from utils.logging_utils import InterpoladorLogger
+
+from scipy.spatial import cKDTree # noqa: F401
+
 
 
 class IDW:
@@ -126,9 +128,7 @@ class IDW:
             ValueError: Se não houver pontos válidos para interpolação.
         """
         # Inicia o logging
-        self.logger.iniciar_interpolacao(
-            f"Pontos: {pontos.shape[0]}, Grade: {grid_x.shape}"
-        )
+        self.logger.iniciar_interpolacao(f"Pontos: {pontos.shape[0]}, Grade: {grid_x.shape}")
 
         try:
             # Validação de entrada
@@ -138,9 +138,7 @@ class IDW:
                 )
 
             if pontos.shape[1] != 2:
-                raise ValueError(
-                    f"Pontos devem ter formato (N, 2), mas têm formato {pontos.shape}"
-                )
+                raise ValueError(f"Pontos devem ter formato (N, 2), mas têm formato {pontos.shape}")
 
             if grid_x.shape != grid_y.shape:
                 raise ValueError(
@@ -193,9 +191,7 @@ class IDW:
                         and self.config.default_value is not None
                     ):
                         # Se um valor padrão foi configurado, usa-o para pontos sem vizinhos
-                        z_interp = np.full(
-                            xi.shape[0], self.config.default_value, dtype=float
-                        )
+                        z_interp = np.full(xi.shape[0], self.config.default_value, dtype=float)
                         self.logger.registrar_progresso(
                             75,
                             f"Usando valor padrão {self.config.default_value} para pontos sem vizinhos",
@@ -203,9 +199,7 @@ class IDW:
                     else:
                         # Caso contrário, usa NaN para pontos sem vizinhos
                         z_interp = np.full(xi.shape[0], np.nan, dtype=float)
-                        self.logger.registrar_progresso(
-                            75, "Usando NaN para pontos sem vizinhos"
-                        )
+                        self.logger.registrar_progresso(75, "Usando NaN para pontos sem vizinhos")
 
                     # Processa apenas pontos com vizinhos válidos
                     has_valid_neighbors = ~no_valid_neighbors

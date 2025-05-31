@@ -11,7 +11,7 @@ Dependências:
     - numpy
 """
 
-import numpy as np # noqa: F401
+import numpy as np  # noqa: F401
 
 
 def criar_grade(xmin: float, xmax: float, ymin: float, ymax: float, resolucao: float):

@@ -1,4 +1,4 @@
-import numpy as np # noqa: F401
+import numpy as np  # noqa: F401
 import pytest
 
 from interpoladores.config import IDWConfig
